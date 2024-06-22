@@ -1,0 +1,124 @@
+h2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-fornecedor-container {
+  display: inline-block;
+  margin-left: 12%;
+  margin-top: 1%;
+  height: 550px;
+  overflow-y: auto;
+  overflow-x: auto;
+  position: relative;
+  border-radius: 15px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  justify-content: center;
+}
+
+.content {
+  background: linear-gradient(135deg, #c0a0e2 0%, #87aef3 100%);
+  height: 100vh;
+  transition: 0.5s;
+}
+
+  
+.table-fornecedor-container::-webkit-scrollbar {
+    display: none; 
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  display: contents;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+}
+  
+thead th {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
+  text-align: center;
+}
+  
+tbody td {
+  padding: 8px;
+  text-align: center;
+}
+  
+thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+thead th:last-child {
+  border-top-right-radius: 10px;
+}
+  
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+  
+tbody tr:nth-child(odd) {
+  background-color: #d2d5d8;
+}
+
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+  
+.editar-button {
+  background-color: #a7dfdf;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #6bb3b3;
+  }
+}
+
+.editar-button img {
+  max-width: 20px;
+  max-height: 20px;
+  margin-right: 8px;
+}
+
+.btNovo {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  display: block;
+}
+  
+.btNovo button {
+  font-size: 50px;
+  width: 55px;
+  height: 55px;
+  border: none;
+  background-color: #a7dfdf;
+  color: #000000;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btNovo button:hover {
+  background-color: #6bb3b3;
+}
+  

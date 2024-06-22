@@ -1,0 +1,147 @@
+/* FornecedorForm.css */
+
+/* Estilos gerais para a página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  /* Contêiner principal */
+  .container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Estilos para o formulário */
+  .formFornecedor {
+    background-color: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+  }
+  
+  .formFornecedor h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .success {
+    color: green;
+    margin-bottom: 10px;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .formFornecedor .nome-cnpj,
+  .formFornecedor .cep-endereco {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .formFornecedor .nome-cnpj .field,
+  .formFornecedor .cep-endereco .field {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .formFornecedor .nome-cnpj .field:last-child,
+  .formFornecedor .cep-endereco .field:last-child {
+    margin-right: 0;
+  }
+  
+  .formFornecedor div {
+    margin-bottom: 15px;
+  }
+  
+  .formFornecedor label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .formFornecedor input[type="text"],
+  .formFornecedor input[type="email"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .formFornecedor input[type="text"]:focus,
+  .formFornecedor input[type="email"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .formFornecedor button[type="submit"] {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .formFornecedor button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para a lista de fornecedores */
+  .fornecedorList {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .fornecedorList h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .fornecedorList ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .fornecedorList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .fornecedorList li span {
+    flex: 1;
+  }
+  
+  .fornecedorList li button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .fornecedorList li button:hover {
+    background-color: #0056b3;
+  }
+  

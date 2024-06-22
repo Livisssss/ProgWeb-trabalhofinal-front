@@ -1,0 +1,141 @@
+/* ESTILO FORMULÁRIO */
+.formulario {
+    width: 45%;
+    margin: 0 auto;
+    margin-top: 60px; 
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ESTILO INPUT FORMULÁRIO */
+.formulario input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px; 
+    background: #e0e3e6;
+    border: none;
+    font-size: 17px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    margin-bottom: 17px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
+/* ESTILO LABEL FORMULÁRIO */
+.formulario label {
+    text-align: left;
+}
+
+
+/* RADIO BUTTONS */
+.radio-buttons {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-column-gap: 50px;
+    align-items: center;
+    justify-items: start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.radio-button-container {
+    display: grid;
+    grid-template-columns: min-content auto;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.radio-buttons label {
+    white-space: nowrap;
+}
+
+.radio-buttons input[type="radio"] {
+    margin-top: 15px; 
+    margin-right: 20px;
+    width: 23px;
+    height: 23px;
+}
+
+/* ESTILO CONTAINER CPNJ E INSCRIÇÃO ESTADUAL */
+.cpf-cnpj-container{
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 25px;
+}
+
+/* ESTILO CONTAINER LOCALIDADE */
+.localidade-container {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 330px 100px 1fr;
+    grid-column-gap: 25px;  
+}
+
+.localidade-container > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ESTILO CONTAINER CONTATO */
+.contato-container {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    grid-column-gap: 25px;
+}
+
+/* BOTÕES CRUD*/
+.botoes-crud {
+    width: 45%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botoes-esquerda {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.botoes-direita {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.botoes-crud button {
+    width: 130px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    margin-top: 50px;
+    transition: background-color 0.2s ease;
+}
+
+/* Estilos específicos para cada botão */
+button[name="btIncluir"] {
+    background-color: #27AE60;
+    color: #F8F8EC;
+}
+
+button[name="btLimpar"] {
+    background-color: #6D8693;
+    color: #F8F8EC;
+}
+
+/* Efeitos de hover */
+button[name="btIncluir"]:hover {
+    background-color: #219653;
+}
+
+button[name="btLimpar"]:hover {
+    background-color: #5C7686;
+}
