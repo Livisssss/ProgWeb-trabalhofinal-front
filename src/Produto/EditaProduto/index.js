@@ -6,7 +6,6 @@ import "./editaProduto.css";
 
 const EditaProduto = () => {
   const navigate = useNavigate();
-
   const location = useLocation();
   const { produtoData } = location.state || {};
 
@@ -45,7 +44,6 @@ const EditaProduto = () => {
       setPreco(produtoData.preco || "");
       setObservacao(produtoData.observacao || "");
       setFornecedorId(produtoData.fornecedor_id || "");
-      console.log("Fornecedor ID:", produtoData.fornecedor_id); // Adicione esta linha
     }
   }, [produtoData]);
 
@@ -65,12 +63,10 @@ const EditaProduto = () => {
       nome,
       descricao,
       quantidade,
-      preco,
+      preco: preco.toString().replace(",", "."), // Convertendo a vírgula decimal para ponto decimal
       observacao,
       fornecedor_id: fornecedorId,
     };
-
-    console.log("Alterando produto:", produto);
 
     try {
       const response = await fetch(
@@ -88,7 +84,6 @@ const EditaProduto = () => {
 
       if (response.ok) {
         alert("Produto alterado com sucesso!");
-
         navigate("/cadastroProdutoInicial");
       } else {
         if (result.error) {

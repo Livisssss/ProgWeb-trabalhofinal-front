@@ -17,16 +17,10 @@ const App = () => {
       <Routes>
         <Route element={<Header />} />
         <Route path="/" element={<Home />} />
-        <Route
-          path="/cadastroFornecedorInicial"
-          element={<CadastroFornecedorInicial />}
-        />
+        <Route path="/cadastroFornecedorInicial" element={<CadastroFornecedorInicial />} />
         <Route path="/cadastroFornecedor" element={<CadastroFornecedor />} />
         <Route path="/editaFornecedor" element={<EditaFornecedor />} />
-        <Route
-          path="/cadastroProdutoInicial"
-          element={<CadastroProdutoInicial />}
-        />
+        <Route path="/cadastroProdutoInicial" element={<CadastroProdutoInicial />} />
         <Route path="/cadastroProduto" element={<CadastroProduto />} />
         <Route path="/editaProduto" element={<EditaProduto />} />
       </Routes>

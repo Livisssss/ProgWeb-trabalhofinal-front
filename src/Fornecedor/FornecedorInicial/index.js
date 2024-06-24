@@ -35,7 +35,6 @@ const FornecedorInicial = () => {
   }, [searchTerm]);
 
   const handleEditClick = (fornecedor) => {
-    console.log("Dados do fornecedor clicado para editar:", fornecedor);
     navigate("/editaFornecedor", { state: { fornecedorData: fornecedor } });
   };
 

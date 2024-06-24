@@ -66,7 +66,6 @@ const ProdutoInicial = () => {
   };
 
   const handleEditClick = async (produto) => {
-    console.log("Dados do produto clicado para editar:", produto);
     const fornecedorData = await fetchFornecedorPorId(produto.fornecedor_id);
     navigate("/editaProduto", {
       state: { produtoData: produto, fornecedorData },
@@ -110,7 +109,7 @@ const ProdutoInicial = () => {
                 <tr key={produto.produto_id}>
                   <td>{produto.produto_id}</td>
                   <td>{produto.nome}</td>
-                  <td>{`${produto.descricao.slice(0, 20)}...`}</td>
+                  <td>{`${produto.descricao.slice(0, 25)}...`}</td>
                   <td>{produto.quantidade}</td>
                   <td>{formatPrice(parseFloat(produto.preco))}</td>
                   <td>{produto.observacao}</td>
