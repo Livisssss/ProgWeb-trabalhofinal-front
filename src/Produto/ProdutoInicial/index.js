@@ -5,82 +5,129 @@ import "./ProdutoInicial.css";
 
 const ProdutoInicial = () => {
   const [produtos, setProdutos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/produto");
+        let url = "http://localhost:3000/api/v1/produto";
+        if (searchTerm.trim() !== "") {
+          url += `?search=${encodeURIComponent(searchTerm)}`;
+        }
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Erro ao buscar os produtos do banco de dados.");
         }
         const produtosData = await response.json();
-        const sortedProdutos = produtosData.sort((a, b) => a.produto_id - b.produto_id);
-        setProdutos(sortedProdutos);
+
+        const produtosComFornecedor = await Promise.all(
+          produtosData.map(async (produto) => {
+            const fornecedorNome = await fetchFornecedorPorId(
+              produto.fornecedor_id
+            );
+            return { ...produto, fornecedor_nome: fornecedorNome };
+          })
+        );
+
+        const filteredProdutos = produtosComFornecedor.filter(
+          (produto) =>
+            produto.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            produto.fornecedor_nome
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+        );
+
+        filteredProdutos.sort((a, b) => a.produto_id - b.produto_id);
+
+        setProdutos(filteredProdutos);
       } catch (error) {
         console.error("Erro ao buscar os produtos:", error);
       }
     };
 
     fetchProdutos();
-  }, []);
+  }, [searchTerm]);
 
-  const handleEditClick = async (produtoId) => {
+  const fetchFornecedorPorId = async (fornecedorId) => {
     try {
-      if (!produtoId) {
-        throw new Error("ID do produto não fornecido.");
-      }
-
-      const response = await fetch(`http://localhost:3000/api/v1/produto/${produtoId}`);
+      const response = await fetch(
+        `http://localhost:3000/api/v1/fornecedor/${fornecedorId}`
+      );
       if (!response.ok) {
-        throw new Error("Erro ao buscar detalhes do produto.");
+        throw new Error(`Erro ao buscar o fornecedor com ID ${fornecedorId}.`);
       }
-      const produtoData = await response.json();
-
-      console.log("Detalhes do produto retornado:", produtoData.nome);
-      console.log("ID:", produtoId);
-
-      navigate("/editaProduto", { state: { produtoData, produtoId } });
+      const fornecedorData = await response.json();
+      return fornecedorData.nome;
     } catch (error) {
-      console.error("Erro ao buscar os detalhes do produto:", error);
+      console.error("Erro ao buscar o fornecedor:", error);
+      return "Desconhecido";
     }
   };
 
+  const handleEditClick = async (produto) => {
+    console.log("Dados do produto clicado para editar:", produto);
+    const fornecedorData = await fetchFornecedorPorId(produto.fornecedor_id);
+    navigate("/editaProduto", {
+      state: { produtoData: produto, fornecedorData },
+    });
+  };
+
+  const formatPrice = (price) => {
+    return `R$ ${price.toFixed(2).replace(".", ",")}`;
+  };
+
   return (
-    <div className="content">
+    <div className="content-produto">
       <Header />
-      <h2>PRODUTOS</h2>
-      <div className="table-produto-container">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NOME</th>
-              <th>DESCRIÇÃO</th>
-              <th>QUANTIDADE</th>
-              <th>PREÇO</th>
-              <th>OBSERVAÇÃO</th>
-              <th>EDITAR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {produtos.map((produto, index) => (
-              <tr key={index}>
-                <td>{produto.produto_id}</td>
-                <td>{produto.nome}</td>
-                <td>{produto.descricao}</td>
-                <td>{produto.quantidade}</td>
-                <td>{produto.preco}</td>
-                <td>{produto.observacao}</td>
-                <td>
-                  <button className="editar-button" onClick={() => handleEditClick(produto.produto_id)}>
-                    <img src="/editar.png" alt="Editar" />                  
-                  </button>
-                </td>
+      <div className="body">
+        <h2>PRODUTOS</h2>
+        <div className="search-container-produto">
+          <input
+            className="input-busca-produto"
+            type="text"
+            placeholder="Buscar por nome ou fornecedor"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="table-produto-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Observação</th>
+                <th>Fornecedor</th>
+                <th>Editar</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {produtos.map((produto) => (
+                <tr key={produto.produto_id}>
+                  <td>{produto.produto_id}</td>
+                  <td>{produto.nome}</td>
+                  <td>{`${produto.descricao.slice(0, 20)}...`}</td>
+                  <td>{produto.quantidade}</td>
+                  <td>{formatPrice(parseFloat(produto.preco))}</td>
+                  <td>{produto.observacao}</td>
+                  <td>{produto.fornecedor_nome}</td>
+                  <td>
+                    <button
+                      className="editar-button-table"
+                      onClick={() => handleEditClick(produto)}
+                    >
+                      <img src="/editar.png" alt="Editar" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="btNovo">
         <Link to="/cadastroProduto">

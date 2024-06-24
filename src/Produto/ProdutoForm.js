@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ProdutoForm = () => {
-  const [fornecedorId, setFornecedorId] = useState('');
+  const [produtoId, setprodutoId] = useState('');
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [quantidade, setQuantidade] = useState('');
   const [preco, setPreco] = useState('');
   const [observacao, setObservacao] = useState('');
-  const [fornecedores, setFornecedores] = useState([]);
+  const [produtos, setprodutos] = useState([]);
 
   useEffect(() => {
-    const fetchFornecedores = async () => {
-      const response = await axios.get('http://localhost:3000/api/v1/fornecedor');
-      setFornecedores(response.data);
+    const fetchprodutos = async () => {
+      const response = await axios.get('http://localhost:3000/api/v1/produto');
+      setprodutos(response.data);
     };
-    fetchFornecedores();
+    fetchprodutos();
   }, []);
 
   const handleSubmit = async (event) => {
@@ -23,7 +23,7 @@ const ProdutoForm = () => {
     try {
       const response = await axios.post('http://localhost:3000/api/v1/produto', {
         produto: {
-          fornecedor_id: fornecedorId,
+          produto_id: produtoId,
           nome,
           descricao,
           quantidade,
@@ -32,7 +32,7 @@ const ProdutoForm = () => {
         }
       });
       console.log(response.data);
-      setFornecedorId('');
+      setprodutoId('');
       setNome('');
       setDescricao('');
       setQuantidade('');
@@ -47,12 +47,12 @@ const ProdutoForm = () => {
     <form onSubmit={handleSubmit}>
       <h2>Cadastrar Produto</h2>
       <div>
-        <label>Fornecedor:</label>
-        <select value={fornecedorId} onChange={(e) => setFornecedorId(e.target.value)} required>
-          <option value="">Selecione um Fornecedor</option>
-          {fornecedores.map((fornecedor) => (
-            <option key={fornecedor.id} value={fornecedor.id}>
-              {fornecedor.nome}
+        <label>produto:</label>
+        <select value={produtoId} onChange={(e) => setprodutoId(e.target.value)} required>
+          <option value="">Selecione um produto</option>
+          {produtos.map((produto) => (
+            <option key={produto.id} value={produto.id}>
+              {produto.nome}
             </option>
           ))}
         </select>

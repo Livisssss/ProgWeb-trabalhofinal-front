@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./CadastroFornecedor.css";
 
 const CadastroFornecedor = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { fornecedorData } = location.state || {};
 
   const [nome, setNome] = useState(fornecedorData ? fornecedorData.nome : "");
   const [cnpj, setCnpj] = useState(fornecedorData ? fornecedorData.cnpj : "");
   const [cep, setCep] = useState(fornecedorData ? fornecedorData.cep : "");
-  const [telefone, setTelefone] = useState(fornecedorData ? fornecedorData.telefone : "");
-  const [endereco, setEndereco] = useState(fornecedorData ? fornecedorData.endereco : "");
-  const [email, setEmail] = useState(fornecedorData ? fornecedorData.email : "");
-
+  const [telefone, setTelefone] = useState(
+    fornecedorData ? fornecedorData.telefone : ""
+  );
+  const [endereco, setEndereco] = useState(
+    fornecedorData ? fornecedorData.endereco : ""
+  );
+  const [email, setEmail] = useState(
+    fornecedorData ? fornecedorData.email : ""
+  );
 
   useEffect(() => {
     if (fornecedorData) {
       setNome(fornecedorData.nome);
       setCnpj(fornecedorData.cnpj);
-      setCep(fornecedorData.cep);
       setTelefone(fornecedorData.telefone);
       setEndereco(fornecedorData.endereco);
       setEmail(fornecedorData.email);
@@ -43,12 +46,16 @@ const CadastroFornecedor = () => {
         const response = await fetch(`https://viacep.com.br/ws/${value}/json/`);
         const data = await response.json();
         if (data.erro) {
-          alert("CEP não encontrado. Por favor, verifique o CEP e tente novamente.");
+          alert(
+            "CEP não encontrado. Por favor, verifique o CEP e tente novamente."
+          );
           return;
         }
-        setEndereco(`${data.logradouro}, ${data.bairro}, ${data.localidade}, ${data.uf}`);
-        if (data.logradouro === '') {
-          setEndereco('');
+        setEndereco(
+          `${data.logradouro}, ${data.bairro}, ${data.localidade}, ${data.uf}`
+        );
+        if (data.logradouro === "") {
+          setEndereco("");
         }
       } catch (error) {
         console.error("Erro ao buscar dados do CEP:", error);
@@ -63,9 +70,8 @@ const CadastroFornecedor = () => {
   };
 
   const verificarCamposObrigatorios = () => {
-    return nome && telefone && email && cnpj && endereco
+    return nome && telefone && email && cnpj && endereco;
   };
-
 
   // BOTÃO LIMPAR
   const limparCampos = () => {
@@ -77,7 +83,6 @@ const CadastroFornecedor = () => {
     setEmail("");
   };
 
-
   // BOTÃO INCLUIR
   const incluirFornecedor = async () => {
     if (!verificarCamposObrigatorios()) {
@@ -85,26 +90,18 @@ const CadastroFornecedor = () => {
       return;
     }
 
-    if (!cep || cep.length !== 9) {
-      alert("Por favor, preencha o CEP corretamente.");
-      return;
-    }
-
-    if (!telefone || telefone.length !== 16) {
+    if (!telefone || telefone.length !== 15) {
       alert("Por favor, preencha o telefone corretamente.");
       return;
     }
 
-    const cliente = {
+    const fornecedor = {
       nome,
       cnpj,
       endereco,
-      cep,
       telefone,
       email,
     };
-
-    console.log("Enviando fornecedor:", cliente);
 
     try {
       const response = await fetch("http://localhost:3000/api/v1/fornecedor", {
@@ -112,21 +109,29 @@ const CadastroFornecedor = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cliente),
+        body: JSON.stringify(fornecedor),
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        alert("Fornecedor incluido com sucesso!");
+        alert("Fornecedor incluído com sucesso!");
         limparCampos();
       } else if (response.status === 422) {
         console.error("Erro de validação:", result);
-        if (result.error === 'Já existe um fornecedor cadastrado com este CNPJ.') {
+        alert(
+          "Erro ao incluir fornecedor. Verifique os dados e tente novamente."
+        );
+      } else if (response.status === 500) {
+        console.error("Erro inesperado:", result);
+        if (
+          result.exception &&
+          result.exception.includes("PG::UniqueViolation")
+        ) {
           alert("Já existe um fornecedor cadastrado com este CNPJ.");
           setCnpj("");
         } else {
-          alert("Erro ao incluir fornecedor. Verifique os dados e tente novamente.");
+          alert("Erro ao incluir fornecedor. Tente novamente.");
         }
       } else {
         console.error("Erro inesperado:", result);
@@ -141,41 +146,97 @@ const CadastroFornecedor = () => {
   return (
     <div className="content">
       <Header />
+      <h2>FORNECEDORES</h2>
       <div className="formulario">
         <label htmlFor="nome">NOME*</label>
-        <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} maxLength="60" />
+        <input
+          type="text"
+          id="nome"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          maxLength="60"
+        />
 
-      <div className="cnpj-cep-container">
-        <div>
+        <div className="cnpj-cep-container">
+          <div>
             <label htmlFor="cnpj">CNPJ*</label>
-            <input type="text" id="cnpj" name="cnpj" value={cnpj} onChange={handleChangeCnpj} maxLength="18" />
-        </div>
-        <div>
+            <input
+              type="text"
+              id="cnpj"
+              name="cnpj"
+              value={cnpj}
+              onChange={handleChangeCnpj}
+              maxLength="18"
+            />
+          </div>
+          <div>
             <label htmlFor="cep">CEP (consulte seu endereço)</label>
-            <input type="text" id="cep" name="cep" value={cep} onChange={handleChangeCep} maxLength="9" />
+            <input
+              type="text"
+              id="cep"
+              name="cep"
+              value={cep}
+              onChange={handleChangeCep}
+              maxLength="9"
+            />
+          </div>
+        </div>
+
+        <label htmlFor="endereco">ENDEREÇO*</label>
+        <input
+          type="text"
+          id="endereco"
+          name="endereco"
+          value={endereco}
+          onChange={(e) => setEndereco(e.target.value)}
+          maxLength="60"
+        />
+
+        <div className="contato-container">
+          <div>
+            <label htmlFor="telefone">TELEFONE*</label>
+            <input
+              type="text"
+              id="telefone"
+              name="telefone"
+              value={telefone}
+              onChange={handleChangeTelefone}
+              maxLength="15"
+            />
+          </div>
+          <div>
+            <label htmlFor="email">E-MAIL*</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              maxLength="60"
+            />
+          </div>
         </div>
       </div>
-
-      <label htmlFor="endereco">ENDEREÇO*</label>
-      <input type="text" id="endereco" name="endereco" value={endereco} onChange={(e) => setEndereco(e.target.value)} maxLength="60" />
-
-      <div className="contato-container">
-        <div>
-          <label htmlFor="telefone">TELEFONE*</label>
-          <input type="text" id="telefone" name="telefone" value={telefone} onChange={handleChangeTelefone} maxLength="16" />
-        </div>
-        <div>
-          <label htmlFor="email">E-MAIL*</label>
-          <input type="text" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength="60" />
-        </div>
-      </div>
-    </div>
       <div className="botoes-crud">
         <div className="botoes-esquerda">
-          <button type="button" name="btIncluir" id="btIncluir" onClick={incluirFornecedor}>INCLUIR</button>
+          <button
+            type="button"
+            name="btIncluir"
+            id="btIncluir"
+            onClick={incluirFornecedor}
+          >
+            INCLUIR
+          </button>
         </div>
         <div className="botoes-direita">
-          <button type="button" name="btLimpar" id="btLimpar" onClick={limparCampos}>LIMPAR</button>
+          <button
+            type="button"
+            name="btLimpar"
+            id="btLimpar"
+            onClick={limparCampos}
+          >
+            LIMPAR
+          </button>
         </div>
       </div>
     </div>
@@ -220,7 +281,7 @@ export const telefoneMascara = (value) => {
     formattedValue += ` ${prefixo}`;
   }
   if (sufixo1) {
-    formattedValue += ` ${sufixo1}`;
+    formattedValue += `${sufixo1}`;
   }
   if (sufixo2) {
     formattedValue += `-${sufixo2}`;
