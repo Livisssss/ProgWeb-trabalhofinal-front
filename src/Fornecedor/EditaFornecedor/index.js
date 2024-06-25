@@ -165,10 +165,10 @@ const EditaFornecedor = () => {
   };
 
   return (
-    <div className="content">
+    <div className="content-fornecedoredita">
       <Header />
       <h2>FORNECEDORES</h2>
-      <div className="formulario">
+      <div className="formulario-fornecedoredita">
         <label htmlFor="nome">NOME*</label>
         <input
           type="text"
@@ -191,7 +191,9 @@ const EditaFornecedor = () => {
             />
           </div>
           <div>
-            <label htmlFor="cep">CEP (consulte seu endereço)</label>
+            <label htmlFor="cep">
+              CEP <span>(consulte o endereço)</span>
+            </label>
             <input
               type="text"
               id="cep"
@@ -238,12 +240,12 @@ const EditaFornecedor = () => {
           </div>
         </div>
       </div>
-      <div className="botoes-crud">
+      <div className="botoes-crud-fornecedoredita">
         <div className="botoes-esquerda">
           <button
             type="button"
-            name="btIncluir"
-            id="btIncluir"
+            name="btAlterar"
+            id="btAlterar"
             onClick={alterarFornecedor}
           >
             ALTERAR

@@ -77,11 +77,11 @@ const ProdutoInicial = () => {
   };
 
   return (
-    <div className="content-produto">
+    <div className="content-produtoinicial">
       <Header />
-      <div className="body">
+      <div className="body-produtoinicial">
         <h2>PRODUTOS</h2>
-        <div className="search-container-produto">
+        <div className="search-container-produtoinicial">
           <input
             className="input-busca-produto"
             type="text"
@@ -128,7 +128,7 @@ const ProdutoInicial = () => {
           </table>
         </div>
       </div>
-      <div className="btNovo">
+      <div className="btNovo-produto">
         <Link to="/cadastroProduto">
           <button>+</button>
         </Link>

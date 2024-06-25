@@ -39,11 +39,11 @@ const FornecedorInicial = () => {
   };
 
   return (
-    <div className="content-fornecedor">
+    <div className="content-fornecedorinicial">
       <Header />
-      <div className="body">
+      <div className="body-fornecedorinicial">
         <h2>FORNECEDORES</h2>
-        <div className="search-container-fornecedor">
+        <div className="search-container-fornecedorinicial">
           <input
             className="input-busca-fornecedor"
             type="text"
@@ -88,7 +88,7 @@ const FornecedorInicial = () => {
           </table>
         </div>
       </div>
-      <div className="btNovo">
+      <div className="btNovo-fornecedorinicial">
         <Link to="/cadastroFornecedor">
           <button>+</button>
         </Link>
