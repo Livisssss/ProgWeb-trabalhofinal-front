@@ -113,10 +113,10 @@ const CadastroProduto = () => {
   };
 
   return (
-    <div className="content">
+    <div className="content-produtocadastro">
       <Header />
       <h2>PRODUTOS</h2>
-      <div className="formulario">
+      <div className="formulario-produtocadastro">
         <label htmlFor="nome">NOME*</label>
         <input
           type="text"
@@ -192,7 +192,7 @@ const CadastroProduto = () => {
           maxLength="150"
         />
       </div>
-      <div className="botoes-crud">
+      <div className="botoes-crud-produtocadastro">
         <div className="botoes-esquerda">
           <button
             type="button"

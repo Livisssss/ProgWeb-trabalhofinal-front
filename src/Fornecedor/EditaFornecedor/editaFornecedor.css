@@ -1,106 +1,130 @@
-h2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.content-fornecedoredita {
+  background: linear-gradient(135deg, #c0a0e2 0%, #87aef3 100%);
+  min-height: 100vh;
+  transition: 0.5s;
+  font-family: "Poppins", sans-serif;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ESTILO FORMULÁRIO */
-.formulario {
-    width: 45%;
-    margin: 0 auto;
-    margin-top: 35px; 
-    font-family: 'Poppins', sans-serif;
+.formulario-fornecedoredita {
+  width: 45%;
+  margin: 0 auto;
+  margin-top: 35px;
+  font-family: "Poppins", sans-serif;
 }
 
-.content {
-    background: linear-gradient(135deg, #c0a0e2 0%, #87aef3 100%);
-    height: 100vh;
-    transition: 0.5s;
-    font-family: 'Poppins', sans-serif;
-  }
-
 /* ESTILO INPUT FORMULÁRIO */
-.formulario input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px; 
-    background: #e0e3e6;
-    border: none;
-    font-size: 17px;
-    padding-left: 10px;
-    padding-right: 10px;
-    box-sizing: border-box;
-    margin-bottom: 17px;
-    font-family: 'Poppins', sans-serif;
-    outline: none;
+.formulario-fornecedoredita input {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background: #e0e3e6;
+  border: none;
+  font-size: 17px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  margin-bottom: 17px;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+.formulario-fornecedoredita input:focus {
+  border: 2px solid #6bb3b3;
+  box-shadow: 0 0 5px rgba(107, 179, 179, 0.5);
 }
 
 /* ESTILO LABEL FORMULÁRIO */
-.formulario label {
-    text-align: left;
+.formulario-fornecedoredita label {
+  text-align: left;
 }
 
 /* ESTILO CONTAINER CPNJ E CEP */
-.cnpj-cep-container{
-    text-align: left;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 25px;
+.cnpj-cep-container {
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 25px;
+}
+
+.cnpj-cep-container span {
+  font-size: 12px;
 }
 
 /* ESTILO CONTAINER CONTATO */
 .contato-container {
-    text-align: left;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 25px;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 25px;
 }
 
 /* BOTÕES CRUD*/
-.botoes-crud {
-    width: 45%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.botoes-crud-fornecedoredita {
+  width: 45%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.botoes-esquerda {
-    display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-}
-
+.botoes-esquerda,
 .botoes-direita {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
-.botoes-crud button {
-    width: 130px;
-    height: 50px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    margin-top: 50px;
-    transition: background-color 0.2s ease;
+.botoes-crud-fornecedoredita button {
+  width: 130px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
 }
 
 /* Estilos específicos para cada botão */
 button[name="btAlterar"] {
-    background-color: #27AE60;
-    color: #F8F8EC;
+  background-color: #27ae60;
+  color: #f8f8ec;
+}
+
+button[name="btAlterar"]:hover {
+  background-color: #1f8b4c;
 }
 
 button[name="btDeletar"] {
-    background-color: #c0392b;
-    color: #f8f8ec;
+  background-color: #c0392b;
+  color: #f8f8ec;
+}
+
+button[name="btDeletar"]:hover {
+  background-color: #a93226;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .formulario-fornecedoredita {
+    width: 90%;
   }
 
-  button[name="btDeletar"]:hover {
-    background-color: #a93226;
+  .botoes-crud-fornecedoredita {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
+
+  .botoes-crud-fornecedoredita button {
+    width: 100%;
+  }
+}

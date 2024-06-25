@@ -63,7 +63,7 @@ const EditaProduto = () => {
       nome,
       descricao,
       quantidade,
-      preco: preco.toString().replace(",", "."), // Convertendo a vírgula decimal para ponto decimal
+      preco: preco.toString().replace(",", "."),
       observacao,
       fornecedor_id: fornecedorId,
     };
@@ -137,10 +137,10 @@ const EditaProduto = () => {
   };
 
   return (
-    <div className="content">
+    <div className="content-produtoedita">
       <Header />
       <h2>PRODUTOS</h2>
-      <div className="formulario">
+      <div className="formulario-produtoedita">
         <label htmlFor="nome">NOME*</label>
         <input
           type="text"
@@ -216,12 +216,12 @@ const EditaProduto = () => {
           maxLength="150"
         />
       </div>
-      <div className="botoes-crud">
+      <div className="botoes-crud-produtoedita">
         <div className="botoes-esquerda">
           <button
             type="button"
-            name="btIncluir"
-            id="btIncluir"
+            name="btAlterar"
+            id="btAlterar"
             onClick={alterarProduto}
           >
             ALTERAR
